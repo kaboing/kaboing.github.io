@@ -1,86 +1,114 @@
 <!DOCTYPE html>
 <html>
-<head>
-    <meta charset='utf-8' />
-    <title></title>
-    <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
-    <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.12.0/mapbox-gl.js'></script>
-    <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.12.0/mapbox-gl.css' rel='stylesheet' />
-    <style>
-        body { margin:0; padding:0; }
-        #map { position:absolute; top:0; bottom:0; width:100%; }
-    </style>
-</head>
-<body>
+    <head>
+        <title>Julekartan</title>
+        
+        <style type="text/css">
+            /* Set a size for our map container, the Google Map will take up 100% of this container */
+            #map {
+                width: 750px;
+                height: 500px;
+            }
+        </style>
+        
+        <!-- 
+            You need to include this script tag on any page that has a Google Map.
 
-<div id='map'></div>
-<script>
-mapboxgl.accessToken = 'pk.eyJ1Ijoia2Fib2luZyIsImEiOiJjaWhwdm01NGowMDBwdnNsdTJmODkxcGY2In0.zFgrHcrQnk9NDgV2ptQxuQ';
-var map = new mapboxgl.Map({
-    container: 'map',
-    style: 'mapbox://styles/kaboing/cihpvoqg80010bum97jskvczz',
-    center: [18.056,59.335],
-    zoom: 15
-});
+            The following script tag will work when opening this example locally on your computer.
+            But if you use this on a localhost server or a live website you will need to include an API key. 
+            Sign up for one here (it's free for small usage): 
+                https://developers.google.com/maps/documentation/javascript/tutorial#api_key
 
-map.on('style.load', function () {
-    map.addSource("markers", {
-        "type": "geojson",
-        "data": {
-            "type": "FeatureCollection",
-            "features": [{
-                "type": "Feature",
-                "geometry": {
-                    "type": "Point",
-                    "coordinates": [18.0555, 59.3346]
-                },
-                "properties": {
-                    "title": "Position 1",
-                    "marker-symbol": "prison"
-                }
-            }, 
-            {
-                "type": "Feature",
-                "geometry": {
-                    "type": "Point",
-                    "coordinates": [18.0568, 59.3350]
-                },
-                "properties": {
-                    "title": "Position 2",
-                    "marker-symbol": "prison"
-                }
-            },
-            {
-                "type": "Feature",
-                "geometry": {
-                    "type": "Point",
-                    "coordinates": [18.0608, 59.337]
-                },
-                "properties": {
-                    "title": "Position 3",
-                    "marker-symbol": "prison"
-                }
-            }],
-        }
-    });
+            After you sign up, use the following script tag with YOUR_GOOGLE_API_KEY replaced with your actual key. -->
+              
+        
+        <script type="text/javascript">
 
-    map.addLayer({
-        "id": "markers",
-        "type": "symbol",
-        "source": "markers",
-        "layout": {
-            "icon-image": "{marker-symbol}-15",
-            "text-field": "{title}",
-            "text-font": ["Open Sans Semibold", "Arial Unicode MS Bold"],
-            "text-offset": [0, 0.6],
-            "text-anchor": "top"
-        },
-        "paint": {
-            "text-size": 12
-        }
-    });
-});
-</script>
+        
+            function initMap() {
+                // Basic options for a simple Google Map
+                // For more options see: https://developers.google.com/maps/documentation/javascript/reference#MapOptions
+                var mapOptions = {
+                    // How zoomed in you want the map to start at (always required)
+                    zoom: 15,
 
-</body>
+                    // The latitude and longitude to center the map (always required)
+                    center: new google.maps.LatLng(59.3346, 18.056),
+
+                    // How you would like to style the map. 
+                    // This is where you would paste any style found on Snazzy Maps.
+                    styles: [   {       "featureType":"landscape",      "stylers":[         {               "hue":"#FFAD00"         },          {               "saturation":50.2           },          {               "lightness":-34.8           },          {               "gamma":1           }       ]   },  {       "featureType":"road.highway",       "stylers":[         {               "hue":"#FFAD00"         },          {               "saturation":-19.8          },          {               "lightness":-1.8            },          {               "gamma":1           }       ]   },  {       "featureType":"road.arterial",      "stylers":[         {               "hue":"#FFAD00"         },          {               "saturation":72.4           },          {               "lightness":-32.6           },          {               "gamma":1           }       ]   },  {       "featureType":"road.local",     "stylers":[         {               "hue":"#FFAD00"         },          {               "saturation":74.4           },          {               "lightness":-18         },          {               "gamma":1           }       ]   },  {       "featureType":"water",      "stylers":[         {               "hue":"#00FFA6"         },          {               "saturation":-63.2          },          {               "lightness":38          },          {               "gamma":1           }       ]   },  {       "featureType":"poi",        "stylers":[         {               "hue":"#FFC300"         },          {               "saturation":54.2           },          {               "lightness":-14.4           },          {               "gamma":1           }       ]   }]
+                };
+
+                // Get the HTML DOM element that will contain your map 
+                // We are using a div with id="map" seen below in the <body>
+                var mapElement = document.getElementById('map');
+
+                var directionsDisplay;
+                var directionsService = new google.maps.DirectionsService();
+                var directionsDisplay = new google.maps.DirectionsRenderer({
+                    polylineOptions: { strokeColor: '#ff0000' }
+                });
+
+                // Create the Google Map using our element and options defined above
+                var map = new google.maps.Map(mapElement, mapOptions);
+
+
+                directionsDisplay.setMap(map);
+
+                var centralen = new google.maps.Marker({
+                    position: new google.maps.LatLng(59.3305, 18.059),
+                    map: map,
+                    title: 'Centralen',
+                    label: 'Centralen'
+                });
+
+                var pos1 = new google.maps.Marker({
+                    position: new google.maps.LatLng(59.3346, 18.0555),
+                    map: map,
+                    title: 'Position 1'
+                });
+                 var pos2 = new google.maps.Marker({
+                    position: new google.maps.LatLng(59.3350, 18.0568),
+                    map: map,
+                    title: 'Position 3'
+                });
+                  var pos3 = new google.maps.Marker({
+                    position: new google.maps.LatLng(59.3372, 18.0609),
+                    map: map,
+                    title: 'Position 3'
+                });
+
+                var lineSymbol = {
+                    path: 'M 0,-1 0,1',
+                    strokeOpacity: 1,
+                    scale: 4
+                };
+
+                var all_path = [centralen, pos1, pos2, pos3];
+
+                directionsService.route({
+                    origin: centralen.position,
+                    destination: pos3.position,
+                    waypoints: [
+                    {location: pos1.position,
+                        stopover: false} ,
+                        {location: pos2.position,
+                        stopover: false} ],
+                    travelMode: google.maps.TravelMode.WALKING
+                  }, function(response, status) {
+                    if (status === google.maps.DirectionsStatus.OK) {
+                      directionsDisplay.setDirections(response);
+                    } else {
+                      window.alert('Directions request failed due to ' + status);
+                    }
+                });
+
+            }
+        </script>
+    </head>
+    <body>
+        <div id="map"></div>
+          <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAqpRp_oz9Oe0yvuVfJGo5wz9RL7wJTapU&sensor=false&callback=&callback=initMap"></script>
+    </body>
 </html>
