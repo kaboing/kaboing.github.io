@@ -46,8 +46,8 @@
 
                 var directionsDisplay;
                 var directionsService = new google.maps.DirectionsService();
-                var directionsDisplay = new google.maps.DirectionsRenderer({
-                    polylineOptions: { strokeColor: '#ff0000' }
+                var directionsDisplay = new google.maps.DirectionsRenderer({ suppressMarkers: true,
+                    polylineOptions: { strokeColor: '#ff0000', strokeOpacity: 0.3, strokeWeight: 4 }
                 });
 
                 // Create the Google Map using our element and options defined above
@@ -60,7 +60,6 @@
                     position: new google.maps.LatLng(59.3305, 18.059),
                     map: map,
                     title: 'Centralen',
-                    label: 'Centralen'
                 });
 
                 var pos1 = new google.maps.Marker({
