@@ -62,17 +62,37 @@
                     title: 'Centralen',
                 });
 
+                var paus1 = new google.maps.Marker({
+                    position: new google.maps.LatLng(59.3331, 18.0573),
+                    map: map,
+                    title: 'Paus 1'
+                });
+
                 var pos1 = new google.maps.Marker({
                     position: new google.maps.LatLng(59.3346, 18.0555),
                     map: map,
                     title: 'Position 1'
                 });
+
+                var paus2 = new google.maps.Marker({
+                    position: new google.maps.LatLng(59.3342, 18.0586),
+                    map: map,
+                    title: 'Paus 2'
+                });
+
                  var pos2 = new google.maps.Marker({
                     position: new google.maps.LatLng(59.3350, 18.0568),
                     map: map,
                     title: 'Position 3'
                 });
-                  var pos3 = new google.maps.Marker({
+
+                var paus3 = new google.maps.Marker({
+                    position: new google.maps.LatLng(59.3368, 18.0582),
+                    map: map,
+                    title: 'Paus 3'
+                });
+
+                var pos3 = new google.maps.Marker({
                     position: new google.maps.LatLng(59.3372, 18.0609),
                     map: map,
                     title: 'Position 3'
@@ -90,13 +110,16 @@
                     origin: centralen.position,
                     destination: pos3.position,
                     waypoints: [
-                    {location: pos1.position,
-                        stopover: false} ,
-                        {location: pos2.position,
-                        stopover: false} ],
+                        { location: paus1.position, stopover: false },
+                        { location: pos1.position, stopover: false },
+                        { location: paus2.position, stopover: false },
+                        { location: pos2.position, stopover: false },
+                        { location: paus3.position, stopover: false }
+                    ],
                     travelMode: google.maps.TravelMode.WALKING
                   }, function(response, status) {
                     if (status === google.maps.DirectionsStatus.OK) {
+                        console.log(response);
                       directionsDisplay.setDirections(response);
                     } else {
                       window.alert('Directions request failed due to ' + status);
@@ -108,6 +131,6 @@
     </head>
     <body>
         <div id="map"></div>
-          <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAqpRp_oz9Oe0yvuVfJGo5wz9RL7wJTapU&sensor=false&callback=&callback=initMap"></script>
+          <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAqpRp_oz9Oe0yvuVfJGo5wz9RL7wJTapU&callback=&callback=initMap"></script>
     </body>
 </html>
