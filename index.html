@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html>
     <head>
         <title>Julekartan</title>
@@ -30,6 +30,38 @@
               
         
         <script type="text/javascript">
+            function startTimer(duration, display) {
+                var timer = duration, days, hours, minutes, seconds;
+                setInterval(function () {
+                    days    = parseInt(timer / 86400, 10);
+                    hours   = parseInt((timer - days * 86400) / 3600, 10);
+                    minutes = parseInt((timer - days * 86400 - hours * 3600)/ 60, 10);
+                    seconds = parseInt(timer % 60, 10);
+
+                    days    = days    < 10 ? "0" + days : days;
+                    hours   = hours   < 10 ? "0" + hours : hours;
+                    minutes = minutes < 10 ? "0" + minutes : minutes;
+                    seconds = seconds < 10 ? "0" + seconds : seconds;
+                    var text = " kvar till nästa!";
+                    if (days > 0) {
+                        text = days + " dagar, " + hours + ":" + minutes + ":" + seconds + text;
+                    }
+                    else if (hours > 0) {
+                        text = hours + ":" + minutes + ":" + seconds + text;
+                    }
+                    else {
+                         text = minutes + ":" + seconds + text;
+                    }
+                    
+                    display.innerHTML = text;
+
+                    if (--timer < 0) {
+                        location.reload();
+                    }
+                }, 1000);
+            }
+
+
             var urlParams;
             (window.onpopstate = function () {
                 var match,
@@ -188,7 +220,7 @@
                 }
                 
 
-                var current_path = { position: centralen};
+                var current_path = { position: centralen, endtime: Date.parse("2016-01-16T08:00:00Z")};
                 for (var i = 0; i < all_path.length; i++) {
                     node = all_path[i];
                     console.log(node);
@@ -203,6 +235,10 @@
                 }
                 console.log("current_path");
                 console.log(current_path);
+
+                var clock = document.getElementById('timeleft');
+                startTimer((current_path.endtime - dateTime)/1000 , clock)
+
 
                 if (current_path.position) {
                     new google.maps.Marker({
@@ -242,11 +278,11 @@
     </head>
     <body>
         <div id="map" style="width:100%"></div>
-          <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAqpRp_oz9Oe0yvuVfJGo5wz9RL7wJTapU&callback=&callback=initMap"></script>
-        <h1>
+         
+        <h1 style="font-size: 500%; text-align: center; width: 100%">
             God Jul!
         </h1>
-        <p><span id="timeleft"> kvar!
-        </p>
+        <div style="text-align: center; width: 100%; font-size: 200%" id="timeleft"></div>
+         <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAqpRp_oz9Oe0yvuVfJGo5wz9RL7wJTapU&callback=&callback=initMap"></script>
     </body>
 </html>
