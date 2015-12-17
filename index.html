@@ -10,6 +10,9 @@
                 height: 500px;
             }
         </style>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js" ></script>   
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery-dateFormat/1.0/jquery.dateFormat.min.js" ></script> 
+         
         
         <!-- 
             You need to include this script tag on any page that has a Google Map.
@@ -23,7 +26,18 @@
               
         
         <script type="text/javascript">
+            var urlParams;
+            (window.onpopstate = function () {
+                var match,
+                    pl     = /\+/g,  // Regex for replacing addition symbol with a space
+                    search = /([^&=]+)=?([^&]*)/g,
+                    decode = function (s) { return decodeURIComponent(s.replace(pl, " ")); },
+                    query  = window.location.search.substring(1);
 
+                urlParams = {};
+                while (match = search.exec(query))
+                   urlParams[decode(match[1])] = decode(match[2]);
+            })();
         
             function initMap() {
                 // Basic options for a simple Google Map
@@ -56,47 +70,21 @@
 
                 directionsDisplay.setMap(map);
 
-                var centralen = new google.maps.Marker({
-                    position: new google.maps.LatLng(59.3305, 18.059),
-                    map: map,
-                    title: 'Centralen',
-                });
+                var centralen = new google.maps.LatLng(59.3305, 18.059);
 
-                var paus1 = new google.maps.Marker({
-                    position: new google.maps.LatLng(59.3331, 18.0573),
-                    map: map,
-                    title: 'Paus 1'
-                });
+                var paus1 = new google.maps.LatLng(59.3331, 18.0573);
+                    
+                var pos1 = new google.maps.LatLng(59.3346, 18.0555);
 
-                var pos1 = new google.maps.Marker({
-                    position: new google.maps.LatLng(59.3346, 18.0555),
-                    map: map,
-                    title: 'Position 1'
-                });
+                var paus2 = new google.maps.LatLng(59.3342, 18.0586);
 
-                var paus2 = new google.maps.Marker({
-                    position: new google.maps.LatLng(59.3342, 18.0586),
-                    map: map,
-                    title: 'Paus 2'
-                });
+                var pos2 = new google.maps.LatLng(59.3350, 18.0568);
 
-                 var pos2 = new google.maps.Marker({
-                    position: new google.maps.LatLng(59.3350, 18.0568),
-                    map: map,
-                    title: 'Position 3'
-                });
+                var paus3 = new google.maps.LatLng(59.3368, 18.0582);
 
-                var paus3 = new google.maps.Marker({
-                    position: new google.maps.LatLng(59.3368, 18.0582),
-                    map: map,
-                    title: 'Paus 3'
-                });
+                var pos3 = new google.maps.LatLng(59.3372, 18.0609);
 
-                var pos3 = new google.maps.Marker({
-                    position: new google.maps.LatLng(59.3372, 18.0609),
-                    map: map,
-                    title: 'Position 3'
-                });
+                var paus4 = new google.maps.LatLng(59.3388, 18.0615);
 
                 var lineSymbol = {
                     path: 'M 0,-1 0,1',
@@ -104,33 +92,152 @@
                     scale: 4
                 };
 
-                var all_path = [centralen, pos1, pos2, pos3];
-
-                directionsService.route({
-                    origin: centralen.position,
-                    destination: pos3.position,
-                    waypoints: [
-                        { location: paus1.position, stopover: false },
-                        { location: pos1.position, stopover: false },
-                        { location: paus2.position, stopover: false },
-                        { location: pos2.position, stopover: false },
-                        { location: paus3.position, stopover: false }
-                    ],
-                    travelMode: google.maps.TravelMode.WALKING
-                  }, function(response, status) {
-                    if (status === google.maps.DirectionsStatus.OK) {
-                        console.log(response);
-                      directionsDisplay.setDirections(response);
-                    } else {
-                      window.alert('Directions request failed due to ' + status);
+                var all_path = [
+                    { 
+                        start_pos: centralen,
+                        end_pos: paus1, 
+                        starttime: Date.parse("2016-01-16T08:00:00Z"),
+                        endtime: Date.parse("2016-01-16T09:00:00Z")
+                    },
+                    { 
+                        position: paus1, 
+                        starttime: Date.parse("2016-01-16T09:00:00Z"),
+                        endtime: Date.parse("2016-01-16T09:20:00Z")
+                    },
+                    { 
+                        start_pos: paus1, 
+                        end_pos: pos1,
+                        starttime: Date.parse("2016-01-16T09:20:00Z"),
+                        endtime: Date.parse("2016-01-16T09:30:00Z")
+                    },
+                    { 
+                        position: pos1,
+                        starttime: Date.parse("2016-01-16T09:30:00Z"),
+                        endtime: Date.parse("2016-01-16T10:30:00Z")
+                    },
+                       { 
+                        start_pos: pos1, 
+                        end_pos: paus2,
+                        starttime: Date.parse("2016-01-16T10:30:00Z"),
+                        endtime: Date.parse("2016-01-16T10:40:00Z")
+                    },
+                       { 
+                        position: paus2, 
+                        starttime: Date.parse("2016-01-16T10:40:00Z"),
+                        endtime: Date.parse("2016-01-16T11:50:00Z")
+                    },
+                     {
+                        start_pos: paus2, 
+                        end_pos: pos2, 
+                        starttime: Date.parse("2016-01-16T11:50:00Z"),
+                        endtime: Date.parse("2016-01-16T12:00:00Z")
+                    },
+                       {
+                        position: pos2, 
+                        starttime: Date.parse("2016-01-16T12:00:00Z"),
+                        endtime: Date.parse("2016-01-16T13:00:00Z")
+                    },
+                     { 
+                        start_pos: pos2, 
+                        end_pos: paus3,
+                        starttime: Date.parse("2016-01-16T13:00:00Z"),
+                        endtime: Date.parse("2016-01-16T13:10:00Z")
+                    },
+                       { 
+                        position: paus3, 
+                        starttime: Date.parse("2016-01-16T13:10:00Z"),
+                        endtime: Date.parse("2016-01-16T14:10:00Z")
+                    },
+                       { 
+                        start_pos: paus3, 
+                        end_pos: pos3,
+                        starttime: Date.parse("2016-01-16T14:10:00Z"),
+                        endtime: Date.parse("2016-01-16T14:20:00Z")
+                    },
+                      { 
+                        position: pos3, 
+                        starttime: Date.parse("2016-01-16T14:20:00Z"),
+                        endtime: Date.parse("2016-01-16T15:20:00Z")
+                    },
+                    { 
+                        start_pos: pos3, 
+                        end_pos: paus4,
+                        starttime: Date.parse("2016-01-16T15:20:00Z"),
+                        endtime: Date.parse("2016-01-16T15:30:00Z")
+                    },
+                      { 
+                        position: paus4, 
+                        starttime: Date.parse("2016-01-16T15:30:00Z"),
+                        endtime: Date.parse("2016-01-16T18:00:00Z")
                     }
-                });
+                ];
+
+
+                var dateTime;
+                if (urlParams["time"]) {
+                    dateTime = Date.parse(urlParams["time"]);
+                    console.log("time found");
+                    console.log(dateTime);
+                } else {
+                    dateTime = new Date();
+                    console.log("now");
+                }
+                
+
+                var current_path = { position: centralen};
+                for (var i = 0; i < all_path.length; i++) {
+                    node = all_path[i];
+                    console.log(node);
+                    if (dateTime <= node.endtime && dateTime >= node.starttime) {
+                        current_path = node;
+                        console.log("Match");
+                        break;
+                    }
+                }
+                if (dateTime > all_path[all_path.length - 1].endtime) {
+                    current_path = node;
+                }
+                console.log("current_path");
+                console.log(current_path);
+
+                if (current_path.position) {
+                    new google.maps.Marker({
+                        position: current_path.position,
+                        map: map,
+                    });
+
+                } 
+                else 
+                {
+                    new google.maps.Marker({
+                        position: current_path.start_pos,
+                        map: map,
+                    });
+                    new google.maps.Marker({
+                        position: current_path.end_pos,
+                        map: map,
+                    });
+
+                    directionsService.route({
+                        origin: current_path.start_pos,
+                        destination: current_path.end_pos,
+                        travelMode: google.maps.TravelMode.WALKING
+                      }, function(response, status) {
+                        if (status === google.maps.DirectionsStatus.OK) {
+                            console.log(response);
+                          directionsDisplay.setDirections(response);
+                        } else {
+                          window.alert('Directions request failed due to ' + status);
+                        }
+                    }
+                    );
+                }
 
             }
         </script>
     </head>
     <body>
-        <div id="map"></div>
+        <div id="map" style="width:100%"></div>
           <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAqpRp_oz9Oe0yvuVfJGo5wz9RL7wJTapU&callback=&callback=initMap"></script>
     </body>
 </html>
