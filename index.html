@@ -6,11 +6,14 @@
         <style type="text/css">
             /* Set a size for our map container, the Google Map will take up 100% of this container */
             #map {
-                width: 750px;
+                width: 100%;
                 height: 500px;
             }
 
-            body { font-family: 'mountains_of_christmasregular', Arial, sans-serif; }
+            body { 
+                font-family: 'mountains_of_christmasregular', Arial, sans-serif; 
+                background-color: #f4deaf; 
+            }
 
         </style>
         <link rel="stylesheet" href="fonts/stylesheet.css" type="text/css" charset="utf-8" />
@@ -138,17 +141,17 @@
                     { 
                         position: paus1, 
                         starttime: Date.parse("2016-01-16T09:00:00Z"),
-                        endtime: Date.parse("2016-01-16T09:20:00Z")
+                        endtime: Date.parse("2016-01-16T09:15:00Z")
                     },
                     { 
                         start_pos: paus1, 
                         end_pos: pos1,
-                        starttime: Date.parse("2016-01-16T09:20:00Z"),
-                        endtime: Date.parse("2016-01-16T09:30:00Z")
+                        starttime: Date.parse("2016-01-16T09:15:00Z"),
+                        endtime: Date.parse("2016-01-16T09:20:00Z")
                     },
                     { 
                         position: pos1,
-                        starttime: Date.parse("2016-01-16T09:30:00Z"),
+                        starttime: Date.parse("2016-01-16T09:20:00Z"),
                         endtime: Date.parse("2016-01-16T10:30:00Z")
                     },
                        { 
@@ -160,17 +163,17 @@
                        { 
                         position: paus2, 
                         starttime: Date.parse("2016-01-16T10:40:00Z"),
-                        endtime: Date.parse("2016-01-16T11:50:00Z")
+                        endtime: Date.parse("2016-01-16T11:40:00Z")
                     },
                      {
                         start_pos: paus2, 
                         end_pos: pos2, 
-                        starttime: Date.parse("2016-01-16T11:50:00Z"),
-                        endtime: Date.parse("2016-01-16T12:00:00Z")
+                        starttime: Date.parse("2016-01-16T11:40:00Z"),
+                        endtime: Date.parse("2016-01-16T11:50:00Z")
                     },
                        {
                         position: pos2, 
-                        starttime: Date.parse("2016-01-16T12:00:00Z"),
+                        starttime: Date.parse("2016-01-16T11:50:00Z"),
                         endtime: Date.parse("2016-01-16T13:00:00Z")
                     },
                      { 
@@ -182,17 +185,17 @@
                        { 
                         position: paus3, 
                         starttime: Date.parse("2016-01-16T13:10:00Z"),
-                        endtime: Date.parse("2016-01-16T14:10:00Z")
+                        endtime: Date.parse("2016-01-16T14:00:00Z")
                     },
                        { 
                         start_pos: paus3, 
                         end_pos: pos3,
-                        starttime: Date.parse("2016-01-16T14:10:00Z"),
-                        endtime: Date.parse("2016-01-16T14:20:00Z")
+                        starttime: Date.parse("2016-01-16T14:00:00Z"),
+                        endtime: Date.parse("2016-01-16T14:10:00Z")
                     },
                       { 
                         position: pos3, 
-                        starttime: Date.parse("2016-01-16T14:20:00Z"),
+                        starttime: Date.parse("2016-01-16T14:10:00Z"),
                         endtime: Date.parse("2016-01-16T15:20:00Z")
                     },
                     { 
@@ -279,10 +282,10 @@
     <body>
         <div id="map" style="width:100%"></div>
          
-        <h1 style="font-size: 500%; text-align: center; width: 100%">
+        <h1 style="font-size: 500%; text-align: center; width: 100%; margin: 10px">
             God Jul!
         </h1>
-        <div style="text-align: center; width: 100%; font-size: 200%" id="timeleft"></div>
+        <div style="text-align: center; width: 100%; font-size: 300%" id="timeleft"></div>
          <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAqpRp_oz9Oe0yvuVfJGo5wz9RL7wJTapU&callback=&callback=initMap"></script>
     </body>
 </html>
