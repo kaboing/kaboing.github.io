@@ -6,8 +6,10 @@
         <style type="text/css">
             /* Set a size for our map container, the Google Map will take up 100% of this container */
             #map {
-                width: 100%;
+                width: 80%;
                 height: 500px;
+				margin-left: auto;
+				margin-right: auto;
             }
 
             body { 
@@ -280,12 +282,21 @@
         </script>
     </head>
     <body>
-        <div id="map" style="width:100%"></div>
+        <div id="map"></div>
          
         <h1 style="font-size: 500%; text-align: center; width: 100%; margin: 10px">
             God Jul!
         </h1>
         <div style="text-align: center; width: 100%; font-size: 300%" id="timeleft"></div>
+		<div style="border: 1px solid black; width: 300px;  margin-top: 50px;margin-left: auto; margin-right: auto;">
+			<ul style="display: inline-block;">
+				<li><strong>Klädsel:</strong> Vardags</li>
+				<li><strong>Barnvakt:</strong> Ordnat</li>
+				<li><strong>Mat:</strong> ingår</li>
+				<li><strong>Fika:</strong> ingår</li>
+				<li><strong>Instuderingslitteratur:</strong> Fem på äventyr</li>
+			</ul>
+		</div>
          <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAqpRp_oz9Oe0yvuVfJGo5wz9RL7wJTapU&callback=&callback=initMap"></script>
     </body>
 </html>
